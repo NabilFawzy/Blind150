@@ -1,20 +1,18 @@
 public class Solution {
-    public int RemoveDuplicates(int[] nums) {
-        int k=1;
-        for(int i=1;i<nums.Length;i++){
-            if(nums[i] != nums[i-1]){
-                nums[k++] = nums[i];
+    public int MaxProfit(int[] prices) {
+        int ptrLeft=0;
+        int ptrRight=0;
+
+        int maxProfit = 0;
+        while(ptrRight<prices.Length){
+            if(prices[ptrLeft]>prices[ptrRight]){
+                ptrLeft = ptrRight;
             }
-            else if( k == 1){
-                 nums[k++] = nums[i];
-            }
-             else if (k - 1 >= 1 && nums[k - 2] != nums[i]) {
-                nums[k++] = nums[i];
-            }
-               
-            }
-     return k;
-        
-       
+            else
+            maxProfit = Math.Max(maxProfit, prices[ptrRight] - prices[ptrLeft]);
+
+            ptrRight++;
+        }
+        return maxProfit;
     }
 }
