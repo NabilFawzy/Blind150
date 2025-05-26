@@ -1,18 +1,17 @@
 public class Solution {
-    public int MaxProfit(int[] prices) {
-        int ptrLeft=0;
-        int ptrRight=0;
-
-        int maxProfit = 0;
-        while(ptrRight<prices.Length){
-            if(prices[ptrLeft]>prices[ptrRight]){
-                ptrLeft = ptrRight;
+    public string LongestCommonPrefix(string[] strs) {
+        if(strs.Length ==1) return strs[0];
+        int index=0;
+        Array.Sort(strs);
+        string str1=  strs[0];
+        string str2= strs[strs.Length-1];
+        for(int i=0;i<str1.Length;i++){
+            if(str1[i] != str2[i]){
+                break;
             }
-            else
-            maxProfit = Math.Max(maxProfit, prices[ptrRight] - prices[ptrLeft]);
-
-            ptrRight++;
+            index++;
         }
-        return maxProfit;
+
+        return str1.Substring(0,index);;
     }
 }
