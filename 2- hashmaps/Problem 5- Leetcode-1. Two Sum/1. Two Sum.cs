@@ -1,20 +1,16 @@
 public class Solution {
-    public bool IsAnagram(string s, string t) {
-        if(s.Length != t.Length) return false;
-        if(s == t) return true;
-        Dictionary<char,int> map = new();
-        foreach(var c in s){
-            if(map.ContainsKey(c)) map[c]++;
-            else map[c]=1;
-        }
-        foreach(var c in t){
-            if(!map.ContainsKey(c)) return false;
+    public int[] TwoSum(int[] nums, int target) {
+        int[] arr = new int[2];
+        Dictionary<int,int> map = new();
+        for(int i=0;i< nums.Length;i++){
+            if(map.ContainsKey(target - nums[i])){
+                arr= new int[] {map[target - nums[i]] , i};
+            }
             else{
-                map[c]--;
-                if(map[c]<0) return false;
+                map[nums[i]] = i;
             }
         }
 
-        return true;
+        return arr ;
     }
 }
