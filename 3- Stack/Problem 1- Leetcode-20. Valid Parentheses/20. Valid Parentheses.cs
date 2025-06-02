@@ -1,20 +1,35 @@
 public class Solution {
-    public bool CanConstruct(string ransomNote, string magazine) {
-        int LenA = ransomNote.Length;
-        int LenB = magazine.Length;
+    public bool IsValid(string s) {
 
-        if(LenA>LenB)return false;
-        int[] arr = new int[26];
-        for(int i=0;i<ransomNote.Length;i++){
-            arr[ransomNote[i] - 'a']++;
-        }
-        for(int i=0;i<magazine.Length;i++){
-            arr[magazine[i] - 'a']--;
-        }
-         foreach(var c in ransomNote){
-            if(arr[(int)(c-'a')] >0) return false;
+        Stack<char> currStack = new Stack<char>();
+        
+        foreach(var c in s){
+            if(c == '(' || c== '{' || c=='['){
+                currStack.Push(c);
+            }
+            else{
+                if(currStack.Count() == 0){
+                   return false;
+                }
+                var prevChar = currStack.Peek();
+                if(
+                   ( c == ')' && prevChar =='(') ||
+                   ( c == ']' && prevChar =='[') ||
+                   ( c == '}' && prevChar =='{') 
+                  )
+                   {
+                      currStack.Pop();
+                   }
+                 else{
+                    return false;
+                 }
+            }
+
+ 
+            
+          
         }
 
-        return true;
+        return currStack.Count() == 0? true: false;
     }
 }
